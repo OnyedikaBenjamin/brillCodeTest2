@@ -21,6 +21,8 @@ public void service(){
             noOfPancakeMade = MAX_PANCAKE_PER_SLOT;
             noOfPancakeConsumed = totalOrders;
             System.out.println("Shopkeeper met the needs of all the customers.");
+            int wastedPancakes = noOfPancakeMade - noOfPancakeConsumed;
+            System.out.println("Pancakes wasted: " + wastedPancakes);
         } else {
             noOfPancakeMade = MAX_PANCAKE_PER_SLOT;
             noOfPancakeConsumed = MAX_PANCAKE_PER_SLOT;
@@ -29,8 +31,6 @@ public void service(){
             System.out.println("Orders not met: " + ordersNotMet);
         }
 
-        int wastedPancakes = noOfPancakeMade - noOfPancakeConsumed;
-        System.out.println("Pancakes wasted: " + wastedPancakes);
     }
     private static int getCurrentTime() {
         LocalDateTime now = LocalDateTime.now();
