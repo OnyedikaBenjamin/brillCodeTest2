@@ -17,8 +17,8 @@ public void service(){
         System.out.println("Starting Time: " + formatTime(startingTime) + " PM.");
         System.out.println("Ending Time: " + formatTime(endingTime) + " PM.");
 
-        if (MAX_PANCAKE_PER_SLOT > totalOrders) {
-            noOfPancakeMade = totalOrders;
+        if (MAX_PANCAKE_PER_SLOT >= totalOrders) {
+            noOfPancakeMade = MAX_PANCAKE_PER_SLOT;
             noOfPancakeConsumed = totalOrders;
             System.out.println("Shopkeeper met the needs of all the customers.");
         } else {
