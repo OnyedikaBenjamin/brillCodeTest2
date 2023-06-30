@@ -13,6 +13,14 @@ public class Concurrent {
     public Concurrent() {
         ran = new Random();
     }
+
+    private static String formatTime(int timeInSeconds) {
+        int hours = timeInSeconds / 3600;
+        int minutes = (timeInSeconds % 3600) / 60;
+        int seconds = timeInSeconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
     public void service() {
         int startingTime = getCurrentTime();
         int endingTime = startingTime + 30;
@@ -20,52 +28,23 @@ public class Concurrent {
         int[] userOrders = generateUserOrders();
         int totalOrders = calculateTotalOrders(userOrders);
 
-        System.out.println("Starting Time: " + startingTime);
-        System.out.println("Ending Time: " + endingTime);
+        System.out.println("Starting Time: " + formatTime(startingTime) + " PM.");
+        System.out.println("Ending Time: " + formatTime(endingTime) + " PM.");
 
-        CountDownLatch latch = new CountDownLatch(NO_OF_USERS);
-        Semaphore semaphore = new Semaphore(MAX_PANCAKE_PER_SLOT);
+        int noOfPancakeMade = Math.min(MAX_PANCAKE_PER_SLOT, totalOrders);
+        int noOfPancakeConsumed = 0;
 
-        CompletableFuture<Integer>[] futures = new CompletableFuture[NO_OF_USERS];
-        for (int i = 0; i < NO_OF_USERS; i++) {
-            int order = userOrders[i];
-            futures[i] = CompletableFuture.supplyAsync(() -> {
-                try {
-                    semaphore.acquire(order);
-                    return order;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    semaphore.release(order);
-                    latch.countDown();
-                }
-                return 0;
-            });
+        if (noOfPancakeMade >= totalOrders) {
+            System.out.println("Shopkeeper met the needs of all the customers.");
+            noOfPancakeConsumed = totalOrders;
+        } else {
+            System.out.println("Shopkeeper could not meet the needs of all the customers.");
+            System.out.println("Orders not met: " + (totalOrders - noOfPancakeMade));
+            noOfPancakeConsumed = noOfPancakeMade;
         }
 
-        try {
-            latch.await();
-            int ordersNotMet = totalOrders - noOfPancakeMade;
-            if (ordersNotMet > 0) {
-                System.out.println("Shopkeeper could not meet the needs of all the customers.");
-                System.out.println("Orders not met: " + ordersNotMet);
-            } else {
-                System.out.println("Shopkeeper met the needs of all the customers.");
-            }
-
-            int wastedPancakes = noOfPancakeMade - noOfPancakeConsumed;
-            System.out.println("Pancakes wasted: " + wastedPancakes);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        for (CompletableFuture<Integer> future : futures) {
-            try {
-                future.get();
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
+        int wastedPancakes = noOfPancakeMade - noOfPancakeConsumed;
+        System.out.println("Pancakes wasted: " + wastedPancakes);
     }
 
     private static int getCurrentTime() {

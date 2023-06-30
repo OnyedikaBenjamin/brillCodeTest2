@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fc9b180e-34be-40c1-b342-b0187189e1e7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Concurrent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Concurrent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NonConcurrent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NonConcurrent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +39,7 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Concurrent">
+  <component name="RunManager" selected="Application.NonConcurrent">
     <configuration name="Concurrent" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Concurrent" />
       <module name="Pancake" />
@@ -54,8 +56,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Concurrent" />
         <item itemvalue="Application.NonConcurrent" />
+        <item itemvalue="Application.Concurrent" />
       </list>
     </recent_temporary>
   </component>
@@ -68,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687234647020</updated>
       <workItem from="1687234652003" duration="9389000" />
-      <workItem from="1688044069448" duration="3899000" />
+      <workItem from="1688044069448" duration="5998000" />
     </task>
     <servers />
   </component>
